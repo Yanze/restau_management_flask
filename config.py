@@ -1,0 +1,3 @@
+DEBUG = True
+RESTAU_NAME = "Big M"
+TABLE_NB = 50

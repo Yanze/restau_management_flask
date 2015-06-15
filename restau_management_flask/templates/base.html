@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <script src = "{{ url_for('static', filename='js/jquery-2.1.1.min.js')}}"></script>
+  <script src = "{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename ='css/bootstrap-theme.min.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename ='css/style.css')}}">
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Restaurant Management System</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li {% if active_page=='index' %}class="active"{% endif %}><a  href="/">Start New Table</a></li>
+        <li {% if active_page == 'message'%} class="active"{% endif%}><a href="/message">Order Dishes</a></li>
+        <li {% if active_page == 'message'%} class="active"{% endif%}><a href="/message">Show Current Group & Order</a></li>
+        <li {% if active_page == 'message'%} class="active"{% endif%}><a href="/message">Release Tables & Checkout</a></li>
+        <li {% if active_page == 'message'%} class="active"{% endif%}><a href="/message">Quit RMS</a></li>
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success fade in">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    {{ message }}
+</div>
+{% endfor %}
+{% block main_content %}
+{% endblock %}
+
+
+
+</body>
+</html>

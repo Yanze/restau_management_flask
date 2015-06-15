@@ -1,0 +1,12 @@
+li{
+  list-style: none;
+}
+
+.flash{
+  color:gray;
+  text-align: center;
+  position: fixed;
+  left: 48%;
+  top: 11%;
+  font-size: small;
+}

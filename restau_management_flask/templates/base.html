@@ -27,11 +27,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li {% if active_page=='index' %}class="active"{% endif %}><a  href="/">Start New Table</a></li>
-        <li {% if active_page == 'message'%} class="active"{% endif%}><a href="/message">Order Dishes</a></li>
-        <li {% if active_page == 'message'%} class="active"{% endif%}><a href="/message">Show Current Group & Order</a></li>
-        <li {% if active_page == 'message'%} class="active"{% endif%}><a href="/message">Release Tables & Checkout</a></li>
-        <li {% if active_page == 'message'%} class="active"{% endif%}><a href="/message">Quit RMS</a></li>
+        <li {% if active_page=='index' %}class="active"{% endif %}><a  href="/">Home</a></li>
+        <li {% if active_page=='menu' %}class="active"{% endif %}><a  href="/menu">Show Menu</a></li>
+        <li {% if active_page=='start' %}class="active"{% endif %}><a  href="/start">Show Menu</a></li>
       </ul>
 
     </div><!-- /.navbar-collapse -->

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% set active_page='menu' %}
+{% block main_content %}
+
+<div class="container well text-center">
+<h3>{{menu.dishes|length}} Dishes</h3>
+<a href="/refresh-menu">Refresh Menu</a>
+<table class="table table-hover">
+{% for dish in menu.dishes %}
+  <tr>
+  <td>{{dish.number}}</td>
+  <td>{{dish.name}}</td>
+  <td>${{dish.price}}</td>
+  <td><img class="dish-img" src="{{ url_for('static', filename ='img/dishes/'+dish.number+'.png')}}" alt=""></td>
+  </tr>
+{% endfor %}
+</table>
+
+</div>
+{% endblock %}

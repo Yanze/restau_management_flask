@@ -10,3 +10,8 @@ li{
   top: 11%;
   font-size: small;
 }
+
+.dish-img{
+  width: 100px;
+  height: 100px;
+}

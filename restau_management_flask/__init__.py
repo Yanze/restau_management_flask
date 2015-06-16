@@ -7,3 +7,9 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__)) # to get the root of the w
 APP_STATIC = os.path.join(APP_ROOT, "static") # get the location of the static folder
 
 from restau_management_flask import views
+
+
+
+
+
+

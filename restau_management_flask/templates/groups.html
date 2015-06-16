@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% set active_page='groups' %}
+{% block main_content %}
+
+<div class="container well">
+  <h3>Customer Groups: {{customer_groups|length}} groups in the restaurant, {{free_tables|length}} tables are available</h3>
+  <br/>
+
+  <div id="dialog-form-start-table" title="Start New Table">
+    <form action="/groups" method="POST" role="form">
+      <fieldset>
+        {{form.hidden_tag()}} <!-- form wtf add secret key -->
+        <div class="form-group">
+          <div class="input-group">
+            {{form.customer_nb(class_='form-control', placeholder='enter customer number')}}
+          </div>
+        </div>
+        <div class="form-group">
+          <input class="btn btn-default" type="submit" value='Submit'>
+        </div>
+
+        {% if form.errors %}
+        <div class="form-group">
+          <ul class="errors">
+            {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+            <div class="alert alert-danger">
+              <li>{{ form[field_name].label }} :{{ error }}</li>
+            </div>
+            {% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+      </fieldset>
+    </form>
+  </div>
+
+
+  <div id="dialog-form-release-table" title="Release Table">
+    <form action="/release-table" method="POST" role="form">
+      <fieldset>
+      {{form2.hidden_tag()}}
+        <div class="form-group">
+          <div class="input-group">
+            {{form2.customer_id(class_='form-control', placeholder='enter customer id')}}
+          </div>
+        </div>
+        <div class="form-group">
+          <input class="btn btn-default" type="submit" value='Submit'>
+        </div>
+
+        {% if form2.errors %}
+        <div class="form-group">
+          <ul class="errors">
+            {% for field_name, field_errors in form2.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+            <div class="alert alert-danger">
+              <li>{{ form2[field_name].label }} :{{ error }}</li>
+            </div>
+            {% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </fieldset>
+    </form>
+  </div>
+
+  <table class="table">
+    {% for group in customer_groups %}
+    <tr>
+      <td>{{group.id}}</td>
+      <td>{{group.number}} customers</td>
+      <td>Total Price: {{group.total_price}}</td>
+      <td>
+        at table: {% for table in group.tables %}
+        {{table.number}}
+        {% endfor %}
+      </td>
+      <td><a id="cofirmation" href="/release-table-v2/{{group.id}}">x</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <button id="start-table">Start New Table</button>
+  <button id="release-table">Release Table</button>
+</div>
+{% endblock %}

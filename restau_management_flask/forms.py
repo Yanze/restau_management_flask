@@ -11,4 +11,11 @@ class ReleaseGroupTable(Form):
   customer_id = IntegerField('Customer_id',
                              validators=[DataRequired()])
 
+class OrderDishesForm(Form):
+  dish_nb = IntegerField('dish_nb', validators=[DataRequired()])
+  customer_id = IntegerField('Customer_id',
+                             validators=[DataRequired()])
+
+
+
 

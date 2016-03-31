@@ -6,6 +6,7 @@
   <h3>Customer Groups: {{customer_groups|length}} groups in the restaurant, {{free_tables|length}} tables are available</h3>
   <br/>
 
+  <!-- start new table -->
   <div id="dialog-form-start-table" title="Start New Table">
     <form action="/groups" method="POST" role="form">
       <fieldset>
@@ -38,52 +39,75 @@
   </div>
 
 
-  <div id="dialog-form-release-table" title="Release Table">
-    <form action="/release-table" method="POST" role="form">
+  <!-- order dishes -->
+  <div id="dialog-form-order-dishes" title="Select Dishes">
+    <form action="/order-dishes" method="POST" role="form">
       <fieldset>
-      {{form2.hidden_tag()}}
+        {{form.hidden_tag()}} <!-- form wtf add secret key -->
         <div class="form-group">
           <div class="input-group">
-            {{form2.customer_id(class_='form-control', placeholder='enter customer id')}}
+            {{form3.dish_nb(id= "dish-number", class_='form-control', placeholder='enter dish number')}}
           </div>
         </div>
+
         <div class="form-group">
-          <input class="btn btn-default" type="submit" value='Submit'>
+          <div class="input-group">
+            {{form3.customer_id(class_='form-control', placeholder='enter group id')}}
+          </div>
         </div>
 
-        {% if form2.errors %}
+        <div class="form-group">
+        <input class="btn btn-default" type="submit" value="Order">
+        <input class="btn btn-default" type="submit" value="Cancel">
+        </div>
+
+        {% if form.errors %}
         <div class="form-group">
           <ul class="errors">
-            {% for field_name, field_errors in form2.errors|dictsort if field_errors %}
+            {% for field_name, field_errors in form.errors|dictsort if field_errors %}
             {% for error in field_errors %}
             <div class="alert alert-danger">
-              <li>{{ form2[field_name].label }} :{{ error }}</li>
+              <li>{{ form[field_name].label }} :{{ error }}</li>
             </div>
             {% endfor %}
             {% endfor %}
           </ul>
         </div>
         {% endif %}
+
       </fieldset>
     </form>
   </div>
 
+
+  <!-- table list-->
   <table class="table">
     {% for group in customer_groups %}
     <tr>
       <td>{{group.id}}</td>
       <td>{{group.number}} customers</td>
+      <td>Dishes Ordered:
+          {% for dish in group.dishes %}
+          {{dish.number}}
+          {% endfor %}
+      </td>
       <td>Total Price: {{group.total_price}}</td>
       <td>
         at table: {% for table in group.tables %}
         {{table.number}}
         {% endfor %}
       </td>
-      <td><a id="cofirmation" href="/release-table-v2/{{group.id}}">x</a></td>
+      <td><button class="confirmation" data-groupId="{{group.id}}">x</button></td>
     </tr>
     {% endfor %}
   </table>
+
   <button id="start-table">Start New Table</button>
-  <button id="release-table">Release Table</button>
+  <button id="order-dishes">Order Dishes</button>
+  <div class="releaseTable" title="Delete group">Delete this group?</div>
+
+
+
+
 </div>
 {% endblock %}
